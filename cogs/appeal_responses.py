@@ -117,7 +117,7 @@ class Appeal_Responses(commands.Cog):
         description='DM test.',
     )
     @has_permissions(kick_members=True)
-    async def dmtest(self, ctx, member: discord.User, arg):
+    async def dmtest(self, ctx, member: discord.User):
 
         await member.send(f"**DM test**")
         embed = discord.Embed(
