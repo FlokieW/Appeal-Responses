@@ -29,24 +29,8 @@ async def on_ready():
         bot.load_extension(cog)
     return
 
-class Utility(commands.Cog):
-
-    def __init__(self, bot):
-        self.bot = bot
-
-    @commands.command(
-        name='?ping',
-        description='The ping command',
-        aliases=['p']
-    )
-    @has_permissions(kick_members=True)
-    async def ping(self, ctx):
-
-        start = d.timestamp(d.now())
-
-        msg = await ctx.send(content='Pinging')
-        await msg.edit(content=f'**Pong!** _One message round-trip took `{(d.timestamp(d.now()) - start) * 1000}ms`._')
-
-        return
+@bot.command()
+async def ping(ctx):
+    await ctx.send('Pong! {0}'.format(round(bot.latency, 1)))
 
 bot.run(token)
