@@ -113,9 +113,8 @@ class Appeal_Responses(commands.Cog):
 
     @commands.command(
         pass_context=True,
-        name='reduce',
-        description='Informs the user that their ban has been reduced because of their appeal.',
-        aliases=['r', 're'],
+        name='dmtest',
+        description='DM test.',
     )
     @has_permissions(kick_members=True)
     async def dmtest(self, ctx, member: discord.User, arg):
