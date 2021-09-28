@@ -111,6 +111,30 @@ class Appeal_Responses(commands.Cog):
 
         return
 
+    @commands.command(
+        pass_context=True,
+        name='reduce',
+        description='Informs the user that their ban has been reduced because of their appeal.',
+        aliases=['r', 're'],
+    )
+    @has_permissions(kick_members=True)
+    async def dmtest(self, ctx, member: discord.User, arg):
+
+        await member.send(f"**DM test**")
+        embed = discord.Embed(
+            title=f"User was DM'd.",
+            color=0xe1e8ed)
+        embed2 = discord.Embed(
+            title=f"User was not DM'd.",
+            color=0xe1e8ed)
+        try:    
+            await ctx.send(content=None, embed=embed)
+        except:
+            await ctx.send(content=None, embed=embed2)
+
+
+        return
+
 
 def setup(bot):
     bot.add_cog(Appeal_Responses(bot))
