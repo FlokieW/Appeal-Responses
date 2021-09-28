@@ -41,10 +41,13 @@ class Appeal_Responses(commands.Cog):
         embed = discord.Embed(
             title=f"<:check:711178140281602129> {member.name}#{member.discriminator} (`{member.id}`) their ban appeal has been approved!",
             color=0x6bd467)
+        embed2 = discord.Embed(
+            title=f"<:check:711178140281602129> {member.name}#{member.discriminator} (`{member.id}`) their ban appeal has been approved but they were not messaged!",
+            color=0x6bd467)
         try:
             await ctx.send(content=None, embed=embed)
         except:
-            await ctx.send("Failed to send DM")
+            await ctx.send(content=None, embed=embed2)
 
         return
 
@@ -69,8 +72,13 @@ class Appeal_Responses(commands.Cog):
         embed = discord.Embed(
             title=f"❌ {member.name}#{member.discriminator} (`{member.id}`) their ban appeal has been denied.",
             color=0xdd2e44)
-        await ctx.send(content=None, embed=embed)
-
+        embed2 = discord.Embed(
+            title=f"❌ {member.name}#{member.discriminator} (`{member.id}`) their ban appeal has been denied but they were not messaged.",
+            color=0xdd2e44)
+        try:    
+            await ctx.send(content=None, embed=embed)
+        except:
+            await ctx.send(content=None, embed=embed2)
         return
 
     @commands.command(
@@ -92,7 +100,13 @@ class Appeal_Responses(commands.Cog):
         embed = discord.Embed(
             title=f"🕐 {member.name}#{member.discriminator} (`{member.id}`) their ban has been reduced to {arg} days.",
             color=0xe1e8ed)
-        await ctx.send(content=None, embed=embed)
+        embed2 = discord.Embed(
+            title=f"🕐 {member.name}#{member.discriminator} (`{member.id}`) their ban has been reduced to {arg} days but they were not messaged.",
+            color=0xe1e8ed)
+        try:    
+            await ctx.send(content=None, embed=embed)
+        except:
+            await ctx.send(content=None, embed=embed2)
 
 
         return
