@@ -6,6 +6,8 @@ import os
 from pymongo import MongoClient
 from discord.ext import commands
 from dotenv import load_dotenv
+from discord.ext.commands import has_permissions
+from datetime import datetime as d
 from pathlib import Path
 
 basepath = Path()
@@ -14,31 +16,8 @@ envars = basepath.cwd() / '.env'
 load_dotenv(envars)
 token = os.getenv('discord_token')
 prefix = os.getenv('bot_prefix')
-mongo_url = os.getenv('mongo_url')
-main_guild_id = os.getenv('main_guild_id')
-appeal_guild_id = os.getenv('appeal_guild_id')
-punishment_logs_id = os.getenv('punishment_logs_id')
-cmd_id = os.getenv('cmd_id')
-appeals_id = os.getenv('appeals_id')
-
-bot_cmd = os.getenv('bot_cmd')
-lfg_casual_na = os.getenv('lfg_casual_na')
-lfg_competitive_na = os.getenv('lfg_competitive_na')
-lfg_custom_na = os.getenv('lfg_custom_na')
-lfg_casual_eu = os.getenv('lfg_casual_eu')
-lfg_competitive_eu = os.getenv('lfg_competitive_eu')
-lfg_custom_eu = os.getenv('lfg_custom_eu')
-lfg_casual_other = os.getenv('lfg_casual_other')
-lfg_competitive_other = os.getenv('lfg_competitive_other')
-lfg_custom_other = os.getenv('lfg_custom_other')
-
 bot = commands.Bot(command_prefix=prefix, case_insensitive=True)
-
-cluster = MongoClient(mongo_url)
-db = cluster["Users"]
-collection = db["Users"]
-
-cogs = ['cogs.util', 'cogs.appeal_responses', 'cogs.error_handler']
+cogs = ['cogs.appeal_responses']
 
 
 @bot.event
@@ -50,16 +29,24 @@ async def on_ready():
         bot.load_extension(cog)
     return
 
-@bot.event
-async def on_message(msg):
+class Utility(commands.Cog):
 
-    cmd = bot.get_channel(int(cmd_id))
+    def __init__(self, bot):
+        self.bot = bot
 
-    await bot.process_commands(msg)
+    @commands.command(
+        name='?ping',
+        description='The ping command',
+        aliases=['p']
+    )
+    @has_permissions(kick_members=True)
+    async def ping(self, ctx):
 
-    if msg.author.bot == False and msg.channel == cmd:
-        await msg.delete()
+        start = d.timestamp(d.now())
 
-    return
+        msg = await ctx.send(content='Pinging')
+        await msg.edit(content=f'**Pong!** _One message round-trip took `{(d.timestamp(d.now()) - start) * 1000}ms`._')
+
+        return
 
 bot.run(token)
