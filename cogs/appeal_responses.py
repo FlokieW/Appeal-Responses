@@ -35,9 +35,6 @@ class Appeal_Responses(commands.Cog):
         await main_guild.unban(member)
         await appeal_guild.kick(member)
 
-        await member.send(
-            "**<:check:711178140281602129> Your ban appeal for the VALORANT Discord has been approved! You can join back by using this link (if the invite link is not working then press `ctrl+r`):** https://discord.gg/VALORANT")
-
         embed = discord.Embed(
             title=f"<:check:711178140281602129> {member.name}#{member.discriminator} (`{member.id}`) their ban appeal has been approved!",
             color=0x6bd467)
@@ -45,6 +42,7 @@ class Appeal_Responses(commands.Cog):
             title=f"<:check:711178140281602129> {member.name}#{member.discriminator} (`{member.id}`) their ban appeal has been approved but they were not messaged!",
             color=0x6bd467)
         try:
+            await member.send("**<:check:711178140281602129> Your ban appeal for the VALORANT Discord has been approved! You can join back by using this link (if the invite link is not working then press `ctrl+r`):** https://discord.gg/VALORANT")
             await ctx.send(content=None, embed=embed)
         except:
             await ctx.send(content=None, embed=embed2)
@@ -68,14 +66,14 @@ class Appeal_Responses(commands.Cog):
 
         await appeal_guild.ban(member)
 
-        await member.send("**❌ Your ban appeal for the VALORANT Discord has been denied.**")
         embed = discord.Embed(
             title=f"❌ {member.name}#{member.discriminator} (`{member.id}`) their ban appeal has been denied.",
             color=0xdd2e44)
         embed2 = discord.Embed(
             title=f"❌ {member.name}#{member.discriminator} (`{member.id}`) their ban appeal has been denied but they were not messaged.",
             color=0xdd2e44)
-        try:    
+        try:
+            await member.send("**❌ Your ban appeal for the VALORANT Discord has been denied.**")
             await ctx.send(content=None, embed=embed)
         except:
             await ctx.send(content=None, embed=embed2)
@@ -96,14 +94,15 @@ class Appeal_Responses(commands.Cog):
 
         await appeal_guild.kick(member)
 
-        await member.send(f"**🕐 Your appeal has been reviewed and your ban has been reduced to {arg} days.**")
         embed = discord.Embed(
             title=f"🕐 {member.name}#{member.discriminator} (`{member.id}`) their ban has been reduced to {arg} days.",
             color=0xe1e8ed)
         embed2 = discord.Embed(
             title=f"🕐 {member.name}#{member.discriminator} (`{member.id}`) their ban has been reduced to {arg} days but they were not messaged.",
             color=0xe1e8ed)
-        try:    
+
+        try:
+            await member.send(f"**🕐 Your appeal has been reviewed and your ban has been reduced to {arg} days.**")    
             await ctx.send(content=None, embed=embed)
         except:
             await ctx.send(content=None, embed=embed2)
