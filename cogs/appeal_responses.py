@@ -119,18 +119,18 @@ class Appeal_Responses(commands.Cog):
     @has_permissions(kick_members=True)
     async def dmtest(self, ctx, member: discord.User):
 
-        await member.send(f"**DM test**")
         embed = discord.Embed(
             title=f"User was DM'd.",
             color=0xe1e8ed)
         embed2 = discord.Embed(
             title=f"User was not DM'd.",
             color=0xe1e8ed)
-        try:    
+
+        try:
+            await member.send(f"**DM test**")
             await ctx.send(content=None, embed=embed)
         except:
             await ctx.send(content=None, embed=embed2)
-
 
         return
 
