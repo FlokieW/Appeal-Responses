@@ -41,7 +41,10 @@ class Appeal_Responses(commands.Cog):
         embed = discord.Embed(
             title=f"<:check:711178140281602129> {member.name}#{member.discriminator} (`{member.id}`) their ban appeal has been approved!",
             color=0x6bd467)
-        await ctx.send(content=None, embed=embed)
+        try:
+            await ctx.send(content=None, embed=embed)
+        except:
+            await ctx.send("Failed to send DM")
 
         return
 
