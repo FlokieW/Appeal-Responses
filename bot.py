@@ -3,11 +3,9 @@ import asyncio
 import discord
 import os
 
-from pymongo import MongoClient
 from discord.ext import commands
 from dotenv import load_dotenv
-from discord.ext.commands import has_permissions
-from datetime import datetime as d
+from discord.ext.commands import has_any_role
 from pathlib import Path
 
 basepath = Path()
@@ -30,6 +28,7 @@ async def on_ready():
     return
 
 @bot.command()
+@has_any_role(758104829242507294, 886986131164520518)
 async def pingapp(ctx):
     await ctx.send('**Pong!** {0}'.format(round(bot.latency, 1)))
 

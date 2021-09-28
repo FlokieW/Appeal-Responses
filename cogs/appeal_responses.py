@@ -23,7 +23,7 @@ class Appeal_Responses(commands.Cog):
         description='Approve an appeal.',
         aliases=['app', 'a', 'accept'],
     )
-    @has_any_role('758104829242507294', '886986131164520518')
+    @has_any_role(758104829242507294, 886986131164520518)
     async def approve(self, ctx, member: discord.User):
 
         main_guild = self.bot.get_guild(int(main_guild_id))
@@ -56,7 +56,7 @@ class Appeal_Responses(commands.Cog):
         aliases=['d'],
         usage='cog'
     )
-    @has_any_role('758104829242507294', '886986131164520518')
+    @has_any_role(758104829242507294, 886986131164520518)
     async def deny(self, ctx, member: discord.User):
 
         appeal_guild = self.bot.get_guild(int(appeal_guild_id))
@@ -84,7 +84,7 @@ class Appeal_Responses(commands.Cog):
         description='Informs the user that their ban has been reduced because of their appeal.',
         aliases=['r', 're'],
     )
-    @has_any_role('758104829242507294', '886986131164520518')
+    @has_any_role(758104829242507294, 886986131164520518)
     async def reduce(self, ctx, member: discord.User, arg):
 
         appeal_guild = self.bot.get_guild(int(appeal_guild_id))
@@ -114,7 +114,7 @@ class Appeal_Responses(commands.Cog):
         name='dmtest',
         description='DM test.',
     )
-    @has_any_role('758104829242507294', '886986131164520518')
+    @has_any_role(758104829242507294, 886986131164520518)
     async def dmtest(self, ctx, member: discord.User):
 
         embed = discord.Embed(
