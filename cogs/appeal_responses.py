@@ -31,9 +31,6 @@ class Appeal_Responses(commands.Cog):
 
         await ctx.message.delete()
 
-        await main_guild.unban(member)
-        await appeal_guild.kick(member)
-
         embed = discord.Embed(
             title=f"<:check:711178140281602129> {member.name}#{member.discriminator} (`{member.id}`) their ban appeal has been approved!",
             color=0x6bd467)
@@ -45,7 +42,9 @@ class Appeal_Responses(commands.Cog):
             await ctx.send(content=None, embed=embed)
         except:
             await ctx.send(content=None, embed=embed2)
-
+        await main_guild.unban(member)
+        await appeal_guild.kick(member)
+        
         return
 
 
@@ -63,8 +62,6 @@ class Appeal_Responses(commands.Cog):
 
         await ctx.message.delete()
 
-        await appeal_guild.ban(member)
-
         embed = discord.Embed(
             title=f"❌ {member.name}#{member.discriminator} (`{member.id}`) their ban appeal has been denied.",
             color=0xdd2e44)
@@ -76,6 +73,8 @@ class Appeal_Responses(commands.Cog):
             await ctx.send(content=None, embed=embed)
         except:
             await ctx.send(content=None, embed=embed2)
+        await appeal_guild.ban(member)        
+        
         return
 
     @commands.command(
@@ -91,8 +90,6 @@ class Appeal_Responses(commands.Cog):
 
         await ctx.message.delete()
 
-        await appeal_guild.kick(member)
-
         embed = discord.Embed(
             title=f"🕐 {member.name}#{member.discriminator} (`{member.id}`) their ban has been reduced to {arg} days.",
             color=0xe1e8ed)
@@ -105,7 +102,7 @@ class Appeal_Responses(commands.Cog):
             await ctx.send(content=None, embed=embed)
         except:
             await ctx.send(content=None, embed=embed2)
-
+        await appeal_guild.kick(member)
 
         return
 
