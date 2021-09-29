@@ -42,9 +42,9 @@ class Appeal_Responses(commands.Cog):
             await ctx.send(content=None, embed=embed)
         except:
             await ctx.send(content=None, embed=embed2)
-        await main_guild.unban(member)
         await appeal_guild.kick(member)
-        
+        await main_guild.unban(member)
+
         return
 
 
